@@ -5,7 +5,7 @@ import { ExternalLink, Copy, Lock, ChevronDown, ChevronRight } from "lucide-reac
 import type { LinkItem } from "@/types";
 import StatusBadge from "./StatusBadge";
 import DynamicIcon from "./DynamicIcon";
-import { copyToClipboard, cn } from "@/lib/utils";
+import { copyToClipboard, displayUrl, cn } from "@/lib/utils";
 
 interface LinkCardCompactProps {
   link: LinkItem;
@@ -67,10 +67,23 @@ export default function LinkCardCompact({ link, index, depth = 0 }: LinkCardComp
           </span>
         )}
 
-        {/* Description (hidden on mobile) */}
-        <span className="hidden md:block text-xs text-muted truncate flex-1 min-w-0">
-          {link.description}
-        </span>
+        {/* URL display */}
+        {hasUrl ? (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex items-center gap-1 text-[11px] text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 truncate flex-1 min-w-0 focus-ring"
+            title={link.url}
+          >
+            <ExternalLink className="w-3 h-3 flex-shrink-0" />
+            <span className="truncate">{displayUrl(link.url!)}</span>
+          </a>
+        ) : (
+          <span className="hidden md:block text-xs text-muted truncate flex-1 min-w-0">
+            {link.description}
+          </span>
+        )}
 
         {/* Tags (hidden on mobile) */}
         <div className="hidden lg:flex items-center gap-1 flex-shrink-0">

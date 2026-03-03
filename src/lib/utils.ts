@@ -83,6 +83,18 @@ export function sortLinks(links: LinkItem[], sort: string): LinkItem[] {
   return sorted;
 }
 
+export function displayUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, "");
+    const path = u.pathname === "/" ? "" : u.pathname;
+    const display = host + path;
+    return display.length > 50 ? display.slice(0, 47) + "..." : display;
+  } catch {
+    return url.length > 50 ? url.slice(0, 47) + "..." : url;
+  }
+}
+
 export function copyToClipboard(text: string): Promise<void> {
   if (navigator.clipboard) {
     return navigator.clipboard.writeText(text);

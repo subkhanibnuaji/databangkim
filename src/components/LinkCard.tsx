@@ -6,7 +6,7 @@ import type { LinkItem } from "@/types";
 import StatusBadge from "./StatusBadge";
 import TagPill from "./TagPill";
 import DynamicIcon from "./DynamicIcon";
-import { relativeTime, copyToClipboard, cn } from "@/lib/utils";
+import { relativeTime, copyToClipboard, displayUrl, cn } from "@/lib/utils";
 import { SOURCE_LABELS } from "@/lib/constants";
 
 interface LinkCardProps {
@@ -92,6 +92,20 @@ export default function LinkCard({ link, isBookmarked, onToggleBookmark, depth =
               </div>
 
               <p className="text-xs text-muted mt-1 line-clamp-2">{link.description}</p>
+
+              {/* Clickable URL display */}
+              {hasUrl && (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 mt-1.5 text-[11px] text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors truncate max-w-full focus-ring"
+                  title={link.url}
+                >
+                  <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                  <span className="truncate">{displayUrl(link.url!)}</span>
+                </a>
+              )}
             </div>
 
             {/* Expand/Collapse for parent nodes */}
