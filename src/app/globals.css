@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+}
+
+:root {
+  /* Primary — Navy Blue (warna utama PKP) */
+  --primary-900: #0a1628;
+  --primary-800: #0f2040;
+  --primary-700: #152d5a;
+  --primary-600: #1a3a73;
+  --primary-500: #1e4d8c;
+  --primary-400: #2a6ab5;
+  --primary-300: #4a8fd4;
+  --primary-200: #7db3e8;
+  --primary-100: #b8d7f5;
+  --primary-50: #e8f2fc;
+
+  /* Accent — Gold/Yellow (aksen PKP) */
+  --accent-600: #b8922e;
+  --accent-500: #d4a844;
+  --accent-400: #e0bc60;
+  --accent-300: #ebd08a;
+  --accent-200: #f5e4b8;
+  --accent-100: #faf2dc;
+
+  /* Semantic */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+
+  /* Neutral */
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+
+  /* App-level tokens */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-hover: #f1f5f9;
+  --section-bg: #ffffff;
+  --header-gradient-from: #0a1628;
+  --header-gradient-to: #1e4d8c;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-focus: #2a6ab5;
+  --badge-bg: #f1f5f9;
+  --badge-text: #475569;
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
+  --border-color: #e2e8f0;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --backdrop-blur: rgba(255, 255, 255, 0.8);
+  --tooltip-bg: #0f172a;
+  --tooltip-text: #f8fafc;
+}
+
+[data-theme="dark"] {
+  --background: #0a1628;
+  --foreground: #f1f5f9;
+  --card-bg: #152d5a;
+  --card-border: #1a3a73;
+  --card-hover: #1a3a73;
+  --section-bg: #0f2040;
+  --header-gradient-from: #050d1a;
+  --header-gradient-to: #0f2040;
+  --input-bg: #0f2040;
+  --input-border: #1a3a73;
+  --input-focus: #4a8fd4;
+  --badge-bg: #1a3a73;
+  --badge-text: #b8d7f5;
+  --muted: #94a3b8;
+  --muted-foreground: #64748b;
+  --border-color: #1a3a73;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --backdrop-blur: rgba(10, 22, 40, 0.8);
+  --tooltip-bg: #e8f2fc;
+  --tooltip-text: #0a1628;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-card-hover: var(--card-hover);
+  --color-section-bg: var(--section-bg);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
+  --color-input-focus: var(--input-focus);
+  --color-badge-bg: var(--badge-bg);
+  --color-badge-text: var(--badge-text);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border-color: var(--border-color);
+  --color-backdrop-blur: var(--backdrop-blur);
+  --color-primary-900: var(--primary-900);
+  --color-primary-800: var(--primary-800);
+  --color-primary-700: var(--primary-700);
+  --color-primary-600: var(--primary-600);
+  --color-primary-500: var(--primary-500);
+  --color-primary-400: var(--primary-400);
+  --color-primary-300: var(--primary-300);
+  --color-primary-200: var(--primary-200);
+  --color-primary-100: var(--primary-100);
+  --color-primary-50: var(--primary-50);
+  --color-accent-600: var(--accent-600);
+  --color-accent-500: var(--accent-500);
+  --color-accent-400: var(--accent-400);
+  --color-accent-300: var(--accent-300);
+  --color-accent-200: var(--accent-200);
+  --color-accent-100: var(--accent-100);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+  --color-gray-900: var(--gray-900);
+  --color-shadow-color: var(--shadow-color);
+  --color-tooltip-bg: var(--tooltip-bg);
+  --color-tooltip-text: var(--tooltip-text);
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+
+/* Focus ring utility */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--primary-400);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Glassmorphism */
+.glass {
+  background: var(--backdrop-blur);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Pulse animation for active status */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Slide down for accordion */
+@keyframes slide-down {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 5000px; }
+}
+
+@keyframes slide-up {
+  from { opacity: 1; max-height: 5000px; }
+  to { opacity: 0; max-height: 0; }
+}
+
+/* Counter animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count-up {
+  animation: count-up 0.5s ease-out forwards;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+/* Nested tree connector lines */
+.tree-line {
+  position: relative;
+}
+
+.tree-line::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color);
+}
+
+.tree-item {
+  position: relative;
+}
+
+.tree-item::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  width: 16px;
+  height: 2px;
+  background: var(--border-color);
+}
