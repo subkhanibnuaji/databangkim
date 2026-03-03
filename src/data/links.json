@@ -71,5 +71,130 @@
       "color": "#6b7280"
     }
   ],
-  "links": []
+  "links": [
+    {
+      "id": "ds-001",
+      "title": "Database Kumuh",
+      "description": "Pusat data kawasan kumuh nasional dari berbagai sumber termasuk Bappenas dan DJ Cipta Karya.",
+      "category": "data-statistik",
+      "icon": "map-pin",
+      "tags": ["kumuh", "kawasan", "baseline", "bappenas", "cipta-karya"],
+      "status": "active",
+      "priority": 1,
+      "addedAt": "2026-03-03",
+      "updatedAt": "2026-03-03",
+      "source": "internal",
+      "accessLevel": "internal",
+      "pinned": true,
+      "children": [
+        {
+          "id": "ds-001-a",
+          "title": "Data Kumuh — Bappenas",
+          "description": "Data kawasan kumuh dari Bappenas (format Excel via OneDrive).",
+          "url": "https://onedrive.live.com/:x:/g/personal/28cbc75e095fdfa3/IQBWarFeQW7eQYxrx1gfqmSQAToF3v-w3Ge0H4uPZddeSSY?rtime=dkqE2_Z43kg&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3gvYy8yOGNiYzc1ZTA5NWZkZmEzL0VWWnFzVjVCYnQ1QmpHdkhXQi1xWkpBQk9nWGVfN0RjWjdRZmk0OWwxMTVKSmc_ZT15TU9iZVQ",
+          "category": "data-statistik",
+          "icon": "file-spreadsheet",
+          "tags": ["bappenas", "kumuh", "excel", "onedrive"],
+          "status": "active",
+          "priority": 1,
+          "addedAt": "2026-03-03",
+          "updatedAt": "2026-03-03",
+          "source": "external",
+          "accessLevel": "public"
+        },
+        {
+          "id": "ds-001-b",
+          "title": "Data Kumuh — DJ Cipta Karya",
+          "description": "Data kawasan kumuh dari Direktorat Jenderal Cipta Karya.",
+          "url": "https://lynk.id/databidangpkp",
+          "category": "data-statistik",
+          "icon": "database",
+          "tags": ["cipta-karya", "kumuh", "djck"],
+          "status": "active",
+          "priority": 2,
+          "addedAt": "2026-03-03",
+          "updatedAt": "2026-03-03",
+          "source": "external",
+          "accessLevel": "public"
+        }
+      ]
+    },
+    {
+      "id": "ds-002",
+      "title": "Data BSPS — Bantuan Stimulan Perumahan Swadaya",
+      "description": "Pusat data program BSPS termasuk realisasi penerima bantuan, progres fisik, dan data toko.",
+      "category": "data-statistik",
+      "icon": "home",
+      "tags": ["bsps", "bantuan", "perumahan", "swadaya", "realisasi"],
+      "status": "active",
+      "priority": 2,
+      "addedAt": "2026-03-03",
+      "updatedAt": "2026-03-03",
+      "source": "internal",
+      "accessLevel": "internal",
+      "pinned": true,
+      "children": [
+        {
+          "id": "ds-002-a",
+          "title": "Daftar Realisasi Penerima Bantuan (Kota, Desa, Pesisir)",
+          "description": "Data realisasi penerima bantuan BSPS untuk kategori Kota, Desa, dan Pesisir.",
+          "url": "https://docs.google.com/spreadsheets/d/1E25EDnWMLo-QW-AEapVtb23nicAPpiEDk0AZDQFQClg/edit",
+          "category": "data-statistik",
+          "icon": "users",
+          "tags": ["realisasi", "penerima", "kota", "desa", "pesisir"],
+          "status": "active",
+          "priority": 1,
+          "addedAt": "2026-03-03",
+          "updatedAt": "2026-03-03",
+          "source": "google-sheet",
+          "accessLevel": "internal"
+        },
+        {
+          "id": "ds-002-b",
+          "title": "QS Progres Fisik BSPS Delineasi Pesisir",
+          "description": "Pelaporan progres fisik (Quantity Surveyor) BSPS untuk delineasi pesisir.",
+          "url": "https://linktr.ee/pelaporanBSPSpesisir",
+          "category": "data-statistik",
+          "icon": "bar-chart",
+          "tags": ["progres-fisik", "qs", "pesisir", "delineasi"],
+          "status": "active",
+          "priority": 2,
+          "addedAt": "2026-03-03",
+          "updatedAt": "2026-03-03",
+          "source": "external",
+          "accessLevel": "internal"
+        },
+        {
+          "id": "ds-002-c",
+          "title": "Data Toko BSPS",
+          "description": "Daftar toko/penyedia bahan bangunan yang terdaftar sebagai mitra BSPS.",
+          "url": "https://docs.google.com/spreadsheets/d/1OhPH9K21CI0WtWEp9WJjewoAOMv3XPOyqbGHTBly0LU/edit?usp=sharing",
+          "category": "data-statistik",
+          "icon": "store",
+          "tags": ["toko", "bahan-bangunan", "mitra"],
+          "status": "active",
+          "priority": 3,
+          "addedAt": "2026-03-03",
+          "updatedAt": "2026-03-03",
+          "source": "google-sheet",
+          "accessLevel": "internal"
+        }
+      ]
+    },
+    {
+      "id": "ds-003",
+      "title": "Database Notion — Data Bidang PKP",
+      "description": "Database Notion berisi kumpulan data dan referensi Bidang Perumahan dan Kawasan Permukiman.",
+      "url": "https://weak-team-cd4.notion.site/277e8e57e13a80a48baae40ee04dc77a?v=277e8e57e13a80e1ae57000c712e470f",
+      "category": "data-statistik",
+      "icon": "database",
+      "tags": ["notion", "database", "bidang-pkp", "referensi"],
+      "status": "active",
+      "priority": 3,
+      "addedAt": "2026-03-03",
+      "updatedAt": "2026-03-03",
+      "source": "external",
+      "accessLevel": "internal"
+    }
+  ]
 }
