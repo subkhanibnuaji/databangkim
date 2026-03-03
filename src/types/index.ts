@@ -1,5 +1,4 @@
 export type CategoryType =
-  | "sistem-informasi"
   | "data-statistik"
   | "regulasi"
   | "monitoring"
@@ -8,6 +7,7 @@ export type CategoryType =
   | "referensi"
   | "tools"
   | "media"
+  | "data-rentek"
   | "lainnya";
 
 export type StatusType = "active" | "maintenance" | "deprecated" | "coming-soon";
