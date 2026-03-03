@@ -64,6 +64,13 @@
       "color": "#b45309"
     },
     {
+      "id": "data-rentek",
+      "label": "Data Rentek",
+      "icon": "clipboard-list",
+      "description": "Data perencanaan teknis Direktorat Bangkim",
+      "color": "#2563eb"
+    },
+    {
       "id": "lainnya",
       "label": "Lainnya",
       "icon": "more-horizontal",
@@ -195,6 +202,54 @@
       "updatedAt": "2026-03-03",
       "source": "external",
       "accessLevel": "internal"
+    },
+    {
+      "id": "rt-001",
+      "title": "Data Rentek Bangkim",
+      "description": "Kumpulan data perencanaan teknis Direktorat Bangkim dari SharePoint dan Google Drive.",
+      "category": "data-rentek",
+      "icon": "clipboard-list",
+      "tags": ["rentek", "perencanaan", "teknis", "bangkim"],
+      "status": "active",
+      "priority": 1,
+      "addedAt": "2026-03-03",
+      "updatedAt": "2026-03-03",
+      "source": "internal",
+      "accessLevel": "internal",
+      "pinned": true,
+      "children": [
+        {
+          "id": "rt-001-a",
+          "title": "SharePoint Rentek 2026",
+          "description": "Dokumen perencanaan teknis 2026 di SharePoint (rentekbangkim@pkp.go.id).",
+          "url": "https://kemenpkp-my.sharepoint.com/shared?id=%2Fsites%2FRENTEK%5F2026%2FDokumen%20Berbagi&listurl=https%3A%2F%2Fkemenpkp%2Esharepoint%2Ecom%2Fsites%2FRENTEK%5F2026%2FDokumen%20Berbagi",
+          "category": "data-rentek",
+          "icon": "folder",
+          "tags": ["sharepoint", "rentek", "2026", "dokumen"],
+          "status": "active",
+          "priority": 1,
+          "addedAt": "2026-03-03",
+          "updatedAt": "2026-03-03",
+          "source": "internal",
+          "accessLevel": "restricted",
+          "notes": "Login dengan akun rentekbangkim@pkp.go.id"
+        },
+        {
+          "id": "rt-001-b",
+          "title": "Google Drive Rentek",
+          "description": "Folder Google Drive berisi data perencanaan teknis Direktorat Bangkim.",
+          "url": "https://drive.google.com/drive/u/0/folders/1L-OOUl2wGTyyqiRV0sFdeihMxym5HxZS",
+          "category": "data-rentek",
+          "icon": "folder",
+          "tags": ["drive", "rentek", "dokumen"],
+          "status": "active",
+          "priority": 2,
+          "addedAt": "2026-03-03",
+          "updatedAt": "2026-03-03",
+          "source": "drive",
+          "accessLevel": "internal"
+        }
+      ]
     }
   ]
 }
