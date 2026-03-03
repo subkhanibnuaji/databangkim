@@ -125,9 +125,9 @@ export default function Home() {
         onRemoveSource={removeSource}
       />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
+      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-8">
         {hasResults ? (
-          <div className="space-y-4">
+          <div className="space-y-2">
             {data.categories.map((category) => (
               <CategorySection
                 key={category.id}

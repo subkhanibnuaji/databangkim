@@ -10,7 +10,7 @@ const initialFilters: FilterState = {
   statuses: [],
   sources: [],
   sort: "priority",
-  view: "grid",
+  view: "list",
 };
 
 export function useSearch(links: LinkItem[]) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import type { Category, LinkItem, ViewMode } from "@/types";
 import LinkCard from "./LinkCard";
 import LinkCardCompact from "./LinkCardCompact";
@@ -29,70 +29,63 @@ export default function CategorySection({
 
   return (
     <section id={`category-${category.id}`} className="animate-fade-in">
-      {/* Category Header */}
+      {/* Category Header — clean, minimal */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center gap-3 py-3 px-4 rounded-xl bg-section-bg hover:bg-card-hover transition-colors group focus-ring"
-        style={{ borderLeft: `3px solid ${category.color}` }}
+        className="w-full flex items-center gap-3 py-3 px-1 group focus-ring rounded-lg"
       >
-        <DynamicIcon
-          name={category.icon}
-          className="w-5 h-5 flex-shrink-0"
-          style={{ color: category.color }}
-        />
+        <div
+          className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: `${category.color}12` }}
+        >
+          <DynamicIcon
+            name={category.icon}
+            className="w-4 h-4"
+            style={{ color: category.color }}
+          />
+        </div>
         <div className="flex-1 text-left">
-          <h2 className="text-sm sm:text-base font-semibold text-foreground">
+          <h2 className="text-sm font-bold text-foreground tracking-tight">
             {category.label}
           </h2>
-          <p className="text-xs text-muted hidden sm:block">{category.description}</p>
         </div>
-        <span
-          className="text-xs font-medium px-2 py-0.5 rounded-full"
-          style={{ backgroundColor: `${category.color}15`, color: category.color }}
-        >
-          {links.length}
+        <span className="text-[11px] text-muted font-medium">
+          {links.length} item
         </span>
-        {expanded ? (
-          <ChevronDown className="w-4 h-4 text-muted group-hover:text-foreground transition-colors" />
-        ) : (
-          <ChevronRight className="w-4 h-4 text-muted group-hover:text-foreground transition-colors" />
-        )}
+        <ChevronDown
+          className={cn(
+            "w-4 h-4 text-muted transition-transform duration-300 ease-out",
+            !expanded && "-rotate-90"
+          )}
+        />
       </button>
 
-      {/* Links */}
-      {expanded && (
-        <div className={cn("mt-3 mb-6", view === "compact" ? "space-y-0.5" : "")}>
-          {view === "grid" ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {links.map((link) => (
-                <LinkCard
-                  key={link.id}
-                  link={link}
-                  isBookmarked={isBookmarked(link.id)}
-                  onToggleBookmark={onToggleBookmark}
-                />
-              ))}
-            </div>
-          ) : view === "list" ? (
-            <div className="space-y-3">
-              {links.map((link) => (
-                <LinkCard
-                  key={link.id}
-                  link={link}
-                  isBookmarked={isBookmarked(link.id)}
-                  onToggleBookmark={onToggleBookmark}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-xl border border-border-color overflow-hidden">
-              {links.map((link, i) => (
-                <LinkCardCompact key={link.id} link={link} index={i} />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+      {/* Links — always single-column for clean hierarchy */}
+      <div
+        className={cn(
+          "overflow-hidden transition-all duration-300 ease-out",
+          expanded ? "mt-2 mb-8 opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        {view === "compact" ? (
+          <div className="rounded-xl border border-border-color overflow-hidden">
+            {links.map((link, i) => (
+              <LinkCardCompact key={link.id} link={link} index={i} />
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {links.map((link) => (
+              <LinkCard
+                key={link.id}
+                link={link}
+                isBookmarked={isBookmarked(link.id)}
+                onToggleBookmark={onToggleBookmark}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 }
