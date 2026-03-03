@@ -46,17 +46,16 @@ interface LinkItem {
 }
 ```
 
-### 10 Kategori yang Tersedia
-1. `sistem-informasi` — Sistem Informasi & Aplikasi
-2. `data-statistik` — Data & Statistik
-3. `regulasi` — Regulasi & Kebijakan
-4. `monitoring` — Monitoring & Evaluasi
-5. `dokumen` — Dokumen & Template
-6. `kolaborasi` — Kolaborasi & Komunikasi
-7. `referensi` — Referensi & Knowledge Base
-8. `tools` — Tools & Utilities
-9. `media` — Media & Publikasi
-10. `lainnya` — Lainnya
+### 9 Kategori yang Tersedia
+1. `data-statistik` — Data & Statistik
+2. `regulasi` — Regulasi & Kebijakan
+3. `monitoring` — Monitoring & Evaluasi
+4. `dokumen` — Dokumen & Template
+5. `kolaborasi` — Kolaborasi & Komunikasi
+6. `referensi` — Referensi & Knowledge Base
+7. `tools` — Tools & Utilities
+8. `media` — Media & Publikasi
+9. `lainnya` — Lainnya
 
 ### Icon yang Tersedia (Lucide)
 database, network, gauge, layout-dashboard, mail, trending-up, gavel, folder, globe, megaphone, message-circle, palette, activity, bar-chart-3, scale, file-text, users, book-open, wrench, image, more-horizontal, monitor-smartphone, map-pin, file-badge, map, table, clipboard-list, home, store, banknote, building-2, hard-hat, landmark, route, waves, droplets, bar-chart, wallet, file-check, book-marked, scroll, send, list-checks, file-spreadsheet, shopping-cart, youtube, headphones, message-square, construction, search

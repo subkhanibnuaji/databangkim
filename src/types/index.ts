@@ -1,5 +1,4 @@
 export type CategoryType =
-  | "sistem-informasi"
   | "data-statistik"
   | "regulasi"
   | "monitoring"
