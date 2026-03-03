@@ -144,8 +144,8 @@
   --color-tooltip-text: var(--tooltip-text);
 }
 
-/* Smooth transitions for theme switching */
-* {
+/* Smooth transitions — scoped to avoid interfering with animations */
+*:not(.animate-fade-in):not([class*="transition-"]) {
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
 }
 
@@ -207,15 +207,23 @@ body {
   animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Fade in animation */
+/* Fade in animation — staggered */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.3s ease-out forwards;
+  animation: fade-in 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
+
+/* Stagger children for smooth list appearance */
+.space-y-2 > .animate-fade-in:nth-child(1) { animation-delay: 0ms; }
+.space-y-2 > .animate-fade-in:nth-child(2) { animation-delay: 50ms; }
+.space-y-2 > .animate-fade-in:nth-child(3) { animation-delay: 100ms; }
+.space-y-2 > .animate-fade-in:nth-child(4) { animation-delay: 150ms; }
+.space-y-2 > .animate-fade-in:nth-child(5) { animation-delay: 200ms; }
+.space-y-2 > .animate-fade-in:nth-child(n+6) { animation-delay: 250ms; }
 
 /* Slide down for accordion */
 @keyframes slide-down {
@@ -248,31 +256,17 @@ body {
   box-shadow: 0 8px 25px var(--shadow-color);
 }
 
-/* Nested tree connector lines */
-.tree-line {
-  position: relative;
+/* No scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Selection */
+::selection {
+  background: var(--primary-200);
+  color: var(--primary-900);
 }
 
-.tree-line::before {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--border-color);
-}
-
-.tree-item {
-  position: relative;
-}
-
-.tree-item::before {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  width: 16px;
-  height: 2px;
-  background: var(--border-color);
+[data-theme="dark"] ::selection {
+  background: var(--primary-700);
+  color: var(--primary-100);
 }

@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, Copy, Bookmark, BookmarkCheck, Lock, ChevronDown, ChevronRight } from "lucide-react";
+import { ExternalLink, Copy, Check, ChevronDown, Lock, ArrowUpRight } from "lucide-react";
 import type { LinkItem } from "@/types";
-import StatusBadge from "./StatusBadge";
-import TagPill from "./TagPill";
 import DynamicIcon from "./DynamicIcon";
-import { relativeTime, copyToClipboard, cn } from "@/lib/utils";
+import { displayUrl, copyToClipboard, cn } from "@/lib/utils";
 import { SOURCE_LABELS } from "@/lib/constants";
 
 interface LinkCardProps {
@@ -23,6 +21,7 @@ export default function LinkCard({ link, isBookmarked, onToggleBookmark, depth =
   const hasUrl = !!link.url;
 
   const handleCopy = async (e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
     if (!link.url) return;
     await copyToClipboard(link.url);
@@ -30,178 +29,148 @@ export default function LinkCard({ link, isBookmarked, onToggleBookmark, depth =
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const isParentNode = hasChildren && !hasUrl;
-
-  return (
-    <div className={cn(depth > 0 && "ml-4 sm:ml-6")}>
-      <div
-        className={cn(
-          "group relative rounded-xl border transition-all",
-          "bg-card-bg border-card-border",
-          hasUrl && "card-hover",
-          depth > 0 && "border-l-2",
-          depth > 0 && "border-l-primary-300 dark:border-l-primary-600",
-          link.pinned && depth === 0 && "ring-1 ring-accent-400/30"
-        )}
-      >
-        {/* Pinned indicator */}
-        {link.pinned && depth === 0 && (
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent-500 rounded-full border-2 border-card-bg" />
-        )}
-
-        <div className="p-4">
-          {/* Top row: icon + title + status */}
-          <div className="flex items-start gap-3">
-            <div
-              className={cn(
-                "flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center",
-                depth === 0
-                  ? "bg-primary-50 text-primary-500 dark:bg-primary-800 dark:text-primary-300"
-                  : "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400"
-              )}
-            >
-              <DynamicIcon name={link.icon} className="w-5 h-5" />
-            </div>
-
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                {hasUrl ? (
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-semibold text-foreground hover:text-primary-500 transition-colors truncate focus-ring"
-                  >
-                    {link.title}
-                  </a>
-                ) : (
-                  <button
-                    onClick={() => hasChildren && setExpanded(!expanded)}
-                    className="text-sm font-semibold text-foreground hover:text-primary-500 transition-colors truncate text-left focus-ring"
-                  >
-                    {link.title}
-                  </button>
-                )}
-                <StatusBadge status={link.status} />
-                {link.accessLevel && link.accessLevel !== "public" && (
-                  <span className="inline-flex items-center gap-0.5 text-[10px] text-warning">
-                    <Lock className="w-3 h-3" />
-                    {link.accessLevel === "restricted" ? "Terbatas" : "Internal"}
-                  </span>
-                )}
-              </div>
-
-              <p className="text-xs text-muted mt-1 line-clamp-2">{link.description}</p>
-            </div>
-
-            {/* Expand/Collapse for parent nodes */}
-            {hasChildren && (
-              <button
-                onClick={() => setExpanded(!expanded)}
-                className="flex-shrink-0 p-1 rounded-md hover:bg-card-hover transition-colors text-muted"
-                aria-label={expanded ? "Collapse" : "Expand"}
-              >
-                {expanded ? (
-                  <ChevronDown className="w-4 h-4" />
-                ) : (
-                  <ChevronRight className="w-4 h-4" />
-                )}
-              </button>
+  // ── Parent node with children ──────────────────────────────────
+  if (hasChildren) {
+    return (
+      <div className="animate-fade-in">
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className={cn(
+            "w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-200 group",
+            "bg-card-bg border border-card-border",
+            "hover:shadow-lg hover:shadow-shadow-color hover:border-primary-200 dark:hover:border-primary-600"
+          )}
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-800 dark:to-primary-700 flex items-center justify-center flex-shrink-0 shadow-sm">
+            <DynamicIcon name={link.icon} className="w-5 h-5 text-primary-500 dark:text-primary-300" />
+          </div>
+          <div className="flex-1 text-left min-w-0">
+            <h3 className="text-[15px] font-semibold text-foreground group-hover:text-primary-500 transition-colors leading-tight">
+              {link.title}
+            </h3>
+            <p className="text-xs text-muted mt-0.5 line-clamp-1">{link.description}</p>
+          </div>
+          <span className="text-[11px] font-medium text-primary-500 dark:text-primary-300 bg-primary-50 dark:bg-primary-800/60 px-2.5 py-1 rounded-full flex-shrink-0">
+            {link.children!.length} link
+          </span>
+          <ChevronDown
+            className={cn(
+              "w-4 h-4 text-muted transition-transform duration-300 ease-out",
+              !expanded && "-rotate-90"
             )}
-          </div>
+          />
+        </button>
 
-          {/* Tags */}
-          {link.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1 mt-3">
-              {link.tags.slice(0, 4).map((tag) => (
-                <TagPill key={tag} tag={tag} />
-              ))}
-              {link.tags.length > 4 && (
-                <span className="text-[10px] text-muted self-center">+{link.tags.length - 4}</span>
-              )}
-            </div>
+        {/* Children */}
+        <div
+          className={cn(
+            "overflow-hidden transition-all duration-300 ease-out",
+            expanded ? "mt-2 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
           )}
-
-          {/* Bottom row: metadata + actions */}
-          <div className="flex items-center justify-between mt-3 pt-3 border-t border-border-color">
-            <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
-              {link.source && (
-                <span className="px-1.5 py-0.5 rounded bg-badge-bg text-badge-text">
-                  {SOURCE_LABELS[link.source] || link.source}
-                </span>
-              )}
-              <span>Diperbarui {relativeTime(link.updatedAt)}</span>
-            </div>
-
-            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              {hasUrl && (
-                <>
-                  <button
-                    onClick={handleCopy}
-                    className="p-1.5 rounded-md hover:bg-card-hover transition-colors text-muted hover:text-foreground focus-ring"
-                    title={copied ? "Tersalin!" : "Salin URL"}
-                  >
-                    <Copy className={cn("w-3.5 h-3.5", copied && "text-success")} />
-                  </button>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1.5 rounded-md hover:bg-card-hover transition-colors text-muted hover:text-foreground focus-ring"
-                    title="Buka di tab baru"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </>
-              )}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onToggleBookmark(link.id);
-                }}
-                className={cn(
-                  "p-1.5 rounded-md hover:bg-card-hover transition-colors focus-ring",
-                  isBookmarked ? "text-accent-500" : "text-muted hover:text-foreground"
-                )}
-                title={isBookmarked ? "Hapus bookmark" : "Bookmark"}
-              >
-                {isBookmarked ? (
-                  <BookmarkCheck className="w-3.5 h-3.5" />
-                ) : (
-                  <Bookmark className="w-3.5 h-3.5" />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Children count indicator */}
-          {hasChildren && !expanded && (
-            <div className="mt-2 text-[10px] text-muted-foreground">
-              {link.children!.length} sub-item{link.children!.length > 1 ? "s" : ""}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Nested Children */}
-      {hasChildren && expanded && (
-        <div className="mt-2 space-y-2 relative">
-          {/* Vertical connector line */}
-          <div className="absolute left-5 top-0 bottom-4 w-0.5 bg-border-color hidden sm:block" />
-          {link.children!.map((child) => (
-            <div key={child.id} className="relative">
-              {/* Horizontal connector */}
-              <div className="absolute left-5 top-6 w-3 h-0.5 bg-border-color hidden sm:block" />
+        >
+          <div className="ml-5 pl-4 border-l-2 border-primary-100 dark:border-primary-700/50 space-y-1.5">
+            {link.children!.map((child) => (
               <LinkCard
+                key={child.id}
                 link={child}
                 isBookmarked={isBookmarked}
                 onToggleBookmark={onToggleBookmark}
                 depth={depth + 1}
               />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      )}
+      </div>
+    );
+  }
+
+  // ── Leaf node with URL ─────────────────────────────────────────
+  if (hasUrl) {
+    return (
+      <a
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(
+          "group flex items-center gap-3.5 px-4 py-3 rounded-xl transition-all duration-200 animate-fade-in",
+          "border border-transparent",
+          depth > 0
+            ? "bg-background hover:bg-primary-50/50 dark:hover:bg-primary-800/20 hover:border-primary-100 dark:hover:border-primary-700/40"
+            : "bg-card-bg border-card-border hover:shadow-lg hover:shadow-shadow-color hover:border-primary-200 dark:hover:border-primary-600"
+        )}
+      >
+        <div
+          className={cn(
+            "w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200",
+            depth > 0
+              ? "bg-gray-100 dark:bg-gray-800 group-hover:bg-primary-50 dark:group-hover:bg-primary-800"
+              : "bg-primary-50 dark:bg-primary-800"
+          )}
+        >
+          <DynamicIcon
+            name={link.icon}
+            className={cn(
+              "w-4 h-4 transition-colors duration-200",
+              depth > 0
+                ? "text-gray-400 dark:text-gray-500 group-hover:text-primary-500 dark:group-hover:text-primary-400"
+                : "text-primary-500 dark:text-primary-300"
+            )}
+          />
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate">
+              {link.title}
+            </span>
+            {link.accessLevel === "restricted" && (
+              <Lock className="w-3 h-3 text-warning flex-shrink-0" />
+            )}
+          </div>
+          <span className="text-[11px] text-muted-foreground truncate block mt-0.5 group-hover:text-muted transition-colors">
+            {displayUrl(link.url!)}
+          </span>
+        </div>
+
+        {link.source && (
+          <span className="hidden sm:inline-block text-[10px] font-medium px-2 py-0.5 rounded-full bg-badge-bg text-badge-text flex-shrink-0 whitespace-nowrap">
+            {SOURCE_LABELS[link.source] || link.source}
+          </span>
+        )}
+
+        {link.notes && (
+          <span className="hidden lg:inline-block text-[10px] text-muted-foreground italic truncate max-w-[160px] flex-shrink-0">
+            {link.notes}
+          </span>
+        )}
+
+        <button
+          onClick={handleCopy}
+          className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-muted hover:text-foreground flex-shrink-0"
+          title={copied ? "Tersalin!" : "Salin URL"}
+        >
+          {copied ? (
+            <Check className="w-3.5 h-3.5 text-success" />
+          ) : (
+            <Copy className="w-3.5 h-3.5" />
+          )}
+        </button>
+
+        <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-primary-500 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 flex-shrink-0" />
+      </a>
+    );
+  }
+
+  // ── Standalone item without URL or children ────────────────────
+  return (
+    <div className="flex items-center gap-3.5 px-4 py-3 rounded-xl bg-card-bg border border-card-border animate-fade-in">
+      <div className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center flex-shrink-0">
+        <DynamicIcon name={link.icon} className="w-4 h-4 text-gray-400" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <span className="text-sm font-medium text-foreground">{link.title}</span>
+        <p className="text-xs text-muted mt-0.5 line-clamp-1">{link.description}</p>
+      </div>
     </div>
   );
 }
