@@ -185,6 +185,21 @@
           "updatedAt": "2026-03-03",
           "source": "google-sheet",
           "accessLevel": "internal"
+        },
+        {
+          "id": "ds-002-d",
+          "title": "PB Yang Tidak Lanjut BSPS TA 2025",
+          "description": "Data penerima bantuan yang tidak melanjutkan program BSPS Tahun Anggaran 2025.",
+          "url": "https://docs.google.com/spreadsheets/d/1vhPLGV7rtmYRDEuD_3ksVvZfA_lEnWYbxhsTgTxTHH0/edit?usp=sharing",
+          "category": "data-statistik",
+          "icon": "file-spreadsheet",
+          "tags": ["bsps", "tidak-lanjut", "ta-2025", "penerima"],
+          "status": "active",
+          "priority": 4,
+          "addedAt": "2026-03-05",
+          "updatedAt": "2026-03-05",
+          "source": "google-sheet",
+          "accessLevel": "internal"
         }
       ]
     },
