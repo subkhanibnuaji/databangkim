@@ -1,3 +1,10 @@
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
 import type { LinkItem, FilterState } from "@/types";
 
 export function relativeTime(dateStr: string): string {
@@ -120,8 +127,4 @@ export function exportAsJson(data: unknown, filename: string): void {
   a.download = filename;
   a.click();
   URL.revokeObjectURL(url);
-}
-
-export function cn(...classes: (string | false | null | undefined)[]): string {
-  return classes.filter(Boolean).join(" ");
 }
