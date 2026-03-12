@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { startTransition, useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
@@ -16,11 +16,20 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     const authStatus = localStorage.getItem(`${STORAGE_KEY}_authenticated`);
     
     if (authStatus === 'true') {
-      setIsAuthenticated(true);
+      startTransition(() => {
+        setIsAuthenticated(true);
+        setIsLoading(false);
+      });
     } else if (pathname !== '/login') {
       router.push('/login');
+      startTransition(() => {
+        setIsLoading(false);
+      });
+    } else {
+      startTransition(() => {
+        setIsLoading(false);
+      });
     }
-    setIsLoading(false);
   }, [pathname, router]);
 
   if (isLoading) {

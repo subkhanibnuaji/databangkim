@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { startTransition, useState, useEffect, useCallback } from "react";
 
 const STORAGE_KEY = "databangkim-bookmarks";
 
@@ -11,7 +11,10 @@ export function useBookmarks() {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
-        setBookmarks(JSON.parse(stored));
+        const parsed = JSON.parse(stored) as string[];
+        startTransition(() => {
+          setBookmarks(parsed);
+        });
       }
     } catch {
       // localStorage not available

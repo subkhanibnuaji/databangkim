@@ -44,7 +44,7 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return booksLibrary.map((b) => ({ id: b.id }));

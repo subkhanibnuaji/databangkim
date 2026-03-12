@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, Copy, Check, Lock, ChevronDown, ArrowUpRight } from "lucide-react";
+import { Copy, Check, Lock, ChevronDown, ArrowUpRight } from "lucide-react";
 import type { LinkItem } from "@/types";
 import DynamicIcon from "./DynamicIcon";
 import { copyToClipboard, displayUrl, cn } from "@/lib/utils";

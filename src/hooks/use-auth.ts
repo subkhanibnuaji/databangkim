@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { startTransition, useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = '__app_auth__';
 
@@ -18,10 +18,12 @@ export function useAuth() {
     const isAuthenticated = localStorage.getItem(`${STORAGE_KEY}_authenticated`) === 'true';
     const storedUser = localStorage.getItem(`${STORAGE_KEY}_user`);
     
-    if (isAuthenticated && storedUser) {
-      setUser({ username: storedUser, isAuthenticated: true });
-    }
-    setIsLoading(false);
+    startTransition(() => {
+      if (isAuthenticated && storedUser) {
+        setUser({ username: storedUser, isAuthenticated: true });
+      }
+      setIsLoading(false);
+    });
   }, []);
 
   const logout = useCallback(() => {

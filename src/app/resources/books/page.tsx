@@ -8,7 +8,7 @@
 //    (LIBRARY_CONFIG + booksLibrary array).
 // ============================================================
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { startTransition, useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -48,7 +48,6 @@ import {
   getBookStats,
   getStatusBadgeClass,
   hasBookSummaryAndEbook,
-  type BookStatus,
 } from '@/lib/data/books';
 
 // ── Filter & Sort Options ────────────────────────────────────
@@ -133,7 +132,11 @@ export default function BooksPage() {
   // Persist view mode
   useEffect(() => {
     const stored = localStorage.getItem('bookViewMode');
-    if (stored === 'grid' || stored === 'list') setViewMode(stored);
+    if (stored === 'grid' || stored === 'list') {
+      startTransition(() => {
+        setViewMode(stored);
+      });
+    }
   }, []);
   useEffect(() => {
     localStorage.setItem('bookViewMode', viewMode);
@@ -215,7 +218,11 @@ export default function BooksPage() {
   }, [search, category, status, ratingFilter, sort, hasSummaryOnly]);
 
   // Reset page on filter change
-  useEffect(() => { setCurrentPage(1); }, [search, category, status, ratingFilter, sort, hasSummaryOnly]);
+  useEffect(() => {
+    startTransition(() => {
+      setCurrentPage(1);
+    });
+  }, [search, category, status, ratingFilter, sort, hasSummaryOnly]);
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paged = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
