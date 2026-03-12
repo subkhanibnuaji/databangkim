@@ -3,7 +3,7 @@
     "title": "DataBangkim",
     "subtitle": "Direktorat Pengembangan Kawasan Permukiman",
     "description": "Pusat data, link, dan resource untuk Direktorat Bangkim — Kementerian PKP",
-    "lastUpdated": "2026-03-03",
+    "lastUpdated": "2026-03-11",
     "maintainer": "Tim IT Bangkim"
   },
   "categories": [
@@ -136,7 +136,7 @@
       "status": "active",
       "priority": 2,
       "addedAt": "2026-03-03",
-      "updatedAt": "2026-03-03",
+      "updatedAt": "2026-03-11",
       "source": "internal",
       "accessLevel": "internal",
       "pinned": true,
@@ -200,6 +200,37 @@
           "updatedAt": "2026-03-05",
           "source": "google-sheet",
           "accessLevel": "internal"
+        },
+        {
+          "id": "ds-002-e",
+          "title": "Data BSPS 2025",
+          "description": "Short link menuju data BSPS 2025.",
+          "url": "https://go.pkp.go.id/",
+          "category": "data-statistik",
+          "icon": "link",
+          "tags": ["bsps", "ta-2025", "shortlink", "pkp"],
+          "status": "active",
+          "priority": 2,
+          "addedAt": "2026-03-11",
+          "updatedAt": "2026-03-11",
+          "source": "external",
+          "accessLevel": "public"
+        },
+        {
+          "id": "ds-002-f",
+          "title": "Data BSPS 2025 — SharePoint",
+          "description": "File Excel data BSPS 2025 di SharePoint RENTEK 2026.",
+          "url": "https://kemenpkp.sharepoint.com/:x:/s/RENTEK_2026/IQD962IJXwNyTZOLiD55R3veAS0YGFdyhvlPujKv_gc7BGw?e=ah3Pai",
+          "category": "data-statistik",
+          "icon": "file-spreadsheet",
+          "tags": ["bsps", "ta-2025", "sharepoint", "excel"],
+          "status": "active",
+          "priority": 2,
+          "addedAt": "2026-03-11",
+          "updatedAt": "2026-03-11",
+          "source": "internal",
+          "accessLevel": "restricted",
+          "notes": "Akses memerlukan login SharePoint Kementerian PKP."
         }
       ]
     },
