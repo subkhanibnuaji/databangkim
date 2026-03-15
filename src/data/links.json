@@ -3,7 +3,7 @@
     "title": "DataBangkim",
     "subtitle": "Direktorat Pengembangan Kawasan Permukiman",
     "description": "Pusat data, link, dan resource untuk Direktorat Bangkim — Kementerian PKP",
-    "lastUpdated": "2026-03-12",
+    "lastUpdated": "2026-03-15",
     "maintainer": "Tim IT Bangkim"
   },
   "categories": [
@@ -234,6 +234,23 @@
           "accessLevel": "internal"
         }
       ]
+    },
+    {
+      "id": "ds-004",
+      "title": "Linktree Fasilitator BSPS",
+      "description": "Kumpulan link penting untuk Fasilitator BSPS — panduan, form pelaporan, dan informasi program.",
+      "url": "https://linktr.ee/FasilitatorBSPS",
+      "category": "kolaborasi",
+      "icon": "trees",
+      "tags": ["linktree", "fasilitator", "bsps", "link-hub", "pelaporan"],
+      "status": "active",
+      "priority": 1,
+      "addedAt": "2026-03-15",
+      "updatedAt": "2026-03-15",
+      "source": "external",
+      "accessLevel": "public",
+      "pinned": true,
+      "notes": "Link hub untuk seluruh Fasilitator BSPS"
     },
     {
       "id": "ds-003",

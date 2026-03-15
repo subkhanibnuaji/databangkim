@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback, useMemo } from "react";
 import Header from "@/components/Header";
+import WelcomeBanner from "@/components/WelcomeBanner";
 import StatsBar from "@/components/StatsBar";
 import SearchFilter from "@/components/SearchFilter";
 import CategorySection from "@/components/CategorySection";
@@ -100,6 +101,8 @@ export default function Home() {
         searchInputRef={searchInputRef}
       />
 
+      <WelcomeBanner />
+
       <StatsBar
         totalLinks={totalLinks}
         totalCategories={data.categories.length}
@@ -125,7 +128,7 @@ export default function Home() {
         onRemoveSource={removeSource}
       />
 
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-8">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-8">
         {hasResults ? (
           <div className="space-y-2">
             {data.categories.map((category) => (

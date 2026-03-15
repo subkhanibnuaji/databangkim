@@ -29,27 +29,28 @@ export default function CategorySection({
 
   return (
     <section id={`category-${category.id}`} className="animate-fade-in">
-      {/* Category Header — clean, minimal */}
+      {/* Category Header */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center gap-3 py-3 px-1 group focus-ring rounded-lg"
+        className="w-full flex items-center gap-3 py-3.5 px-3 group focus-ring rounded-xl hover:bg-card-hover transition-colors duration-200"
       >
         <div
-          className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-          style={{ backgroundColor: `${category.color}12` }}
+          className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-110"
+          style={{ backgroundColor: `${category.color}18` }}
         >
           <DynamicIcon
             name={category.icon}
-            className="w-4 h-4"
+            className="w-4.5 h-4.5"
             style={{ color: category.color }}
           />
         </div>
         <div className="flex-1 text-left">
-          <h2 className="text-sm font-bold text-foreground tracking-tight">
+          <h2 className="text-sm font-bold text-foreground tracking-tight group-hover:text-primary-500 transition-colors">
             {category.label}
           </h2>
+          <p className="text-[11px] text-muted hidden sm:block">{category.description}</p>
         </div>
-        <span className="text-[11px] text-muted font-medium">
+        <span className="text-[11px] text-muted font-semibold bg-badge-bg px-2.5 py-1 rounded-full">
           {links.length} item
         </span>
         <ChevronDown

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useEffect, useState } from "react";
-import { Building2, Search, X } from "lucide-react";
+import { Building2, Search, X, ExternalLink, Sparkles } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 interface HeaderProps {
@@ -58,16 +58,26 @@ export default function Header({ theme, onToggleTheme, searchValue, onSearch, se
                 <Building2 className="w-6 h-6 text-accent-400" />
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
                   Data<span className="text-accent-400">Bangkim</span>
+                  <Sparkles className="w-4 h-4 text-accent-400 animate-pulse-dot" />
                 </h1>
                 <p className="text-xs sm:text-sm text-primary-200 font-medium">
-                  Dir. Pengembangan Kawasan Permukiman
+                  Pusat Data & Link Hub — Dir. Bangkim
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
+              <a
+                href="https://linktr.ee/FasilitatorBSPS"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent-500/20 border border-accent-400/30 text-accent-300 hover:bg-accent-500/30 hover:text-accent-200 transition-all text-xs font-medium backdrop-blur"
+              >
+                <ExternalLink className="w-3 h-3" />
+                Linktree Fasilitator
+              </a>
               <ThemeToggle theme={theme} onToggle={onToggleTheme} />
             </div>
           </div>
